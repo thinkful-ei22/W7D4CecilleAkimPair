@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import TopNav from './top-nav';
-import InfoModal from './info-modal';
+import TopNav from "./top-nav.js";
+import InfoModal from "./info-modal";
 
-import './header.css';
+import "./header.css";
 
 export default function Header(props) {
-    return (
-        <header>
-            <TopNav />
-            <h1>HOT or COLD</h1>
-        </header>
-    );
-};
+  return (
+    <header>
+      <TopNav openTutorial={props.openTutorial} reset={props.reset} />
+      <h1>HOT or COLD</h1>
+    </header>
+  );
+}

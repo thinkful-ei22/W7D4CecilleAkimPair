@@ -1,23 +1,28 @@
-import React from 'react';
+import React from "react";
 
-import './top-nav.css';
+import "./top-nav.css";
 
-export default function TopNav(props) {
+export default class TopNav extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     return (
-        <nav>
-            <ul className="clearfix">
-                <li>
-                    <a className="what" href="#">
-                        What?
-                    </a>
-                </li>
-                <li>
-                    <a className="new" href="#">
-                        + New Game
-                    </a>
-                </li>
-            </ul>
-        </nav>
+      <nav>
+        <ul className="clearfix">
+          <li>
+            <a className="what" href="#" onClick={this.props.openTutorial}>
+              What?
+            </a>
+          </li>
+          <li>
+            <a className="new" href="#" onClick={this.props.reset}>
+              + New Game
+            </a>
+          </li>
+        </ul>
+      </nav>
     );
+  }
 }
-
