@@ -8,7 +8,7 @@ import "./header.css";
 export default function Header(props) {
   return (
     <header>
-      <TopNav openTutorial={props.openTutorial} reset={props.reset} />
+      <TopNav toggleTutorial={props.toggleTutorial} reset={props.reset} />
       <h1>HOT or COLD</h1>
     </header>
   );

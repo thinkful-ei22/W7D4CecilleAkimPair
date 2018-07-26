@@ -26,7 +26,7 @@ export default function InfoModal(props) {
             </li>
           </ul>
           <p>So, Are you ready?</p>
-          <a className="close" href="#" onClick={props.closeTutorial}>
+          <a className="close" href="#" onClick={props.toggleTutorial}>
             Got It!
           </a>
         </div>

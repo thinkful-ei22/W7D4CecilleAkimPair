@@ -29,22 +29,10 @@ export default class Game extends React.Component {
     });
   }
 
-  onFeedbackGiven(boolean) {
-    this.setState({
-      feedback: boolean
-    });
-  }
-
-  openTutorial() {
-    this.setState({
-      tutorial: true
-    });
-  }
-
-  closeTutorial() {
-    this.setState({
-      tutorial: false
-    });
+  toggleTutorial() {
+    this.state.tutorial
+      ? this.setState({ tutorial: false })
+      : this.setState({ tutorial: true });
   }
 
   reset() {
@@ -57,20 +45,17 @@ export default class Game extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.state.secretNum);
-
     const currGuess = this.state.currGuess;
     const secretNum = this.state.secretNum;
     const prevGuess = this.state.prevGuess;
 
     if (this.state.tutorial === true) {
-      return <InfoModal closeTutorial={() => this.closeTutorial()} />;
+      return <InfoModal toggleTutorial={() => this.toggleTutorial()} />;
     }
     return (
       <div>
         <Header
-          openTutorial={() => this.openTutorial()}
+          toggleTutorial={() => this.toggleTutorial()}
           reset={() => this.reset()}
         />
         <GuessSection

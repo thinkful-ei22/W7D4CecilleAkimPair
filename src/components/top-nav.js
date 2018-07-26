@@ -12,7 +12,7 @@ export default class TopNav extends React.Component {
       <nav>
         <ul className="clearfix">
           <li>
-            <a className="what" href="#" onClick={this.props.openTutorial}>
+            <a className="what" href="#" onClick={this.props.toggleTutorial}>
               What?
             </a>
           </li>

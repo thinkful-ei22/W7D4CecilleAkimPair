@@ -10,7 +10,6 @@ export default class GuessSection extends React.Component {
   }
 
   feedback(currGuess, secretNum) {
-    console.log(`BANANA currGuess = ${currGuess}, secretNum ${secretNum}`);
     if (currGuess === undefined) {
       return "Make a Guess!";
     } else if (currGuess === secretNum) {
