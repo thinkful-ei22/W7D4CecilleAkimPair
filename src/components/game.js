@@ -5,51 +5,34 @@ import GuessSection from "./guess-section";
 import GuessCount from "./guess-count";
 import GuessList from "./guess-list";
 import InfoModal from "./info-modal";
+import { makeGuess } from "../action.js";
+import { connect } from "react-redux";
 
-export default class Game extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      secretNum: Math.floor(Math.random() * 100) + 1,
-      currGuess: undefined,
-      prevGuess: [],
-      tutorial: false
-    };
+class Game extends React.Component {
+  makeGuess(guess) {
+    this.props.dispatch(makeGuess(guess))
   }
 
-  addGuess(e) {
-    const parsedGuess = parseInt(e.target.userGuess.value, 10);
-    if (parsedGuess > 100 || parsedGuess < 0) {
-      return alert("Please choose a number from 0-100");
-    }
-    this.setState({
-      currGuess: parsedGuess,
-      prevGuess: [...this.state.prevGuess, parsedGuess]
-    });
-  }
-
-  toggleTutorial() {
-    this.state.tutorial
-      ? this.setState({ tutorial: false })
-      : this.setState({ tutorial: true });
-  }
-
-  reset() {
-    this.setState({
-      secretNum: Math.floor(Math.random() * 100) + 1,
-      currGuess: undefined,
-      prevGuess: [],
-      tutorial: false
-    });
-  }
+  // toggleTutorial() {
+  //   this.state.tutorial
+  //     ? this.setState({ tutorial: false })
+  //     : this.setState({ tutorial: true });
+  // }
+  //
+  // reset() {
+  //   this.setState({
+  //     secretNum: Math.floor(Math.random() * 100) + 1,
+  //     currGuess: undefined,
+  //     prevGuess: [],
+  //     tutorial: false
+  //   });
+  // }
 
   render() {
-    const currGuess = this.state.currGuess;
-    const secretNum = this.state.secretNum;
-    const prevGuess = this.state.prevGuess;
-
-    if (this.state.tutorial === true) {
+    const currGuess = this.props.currGuess;
+    const secretNum = this.props.secretNum;
+    const prevGuess = this.props.prevGuess;
+    if (this.props.tutorial === true) {
       return <InfoModal toggleTutorial={() => this.toggleTutorial()} />;
     }
     return (
@@ -59,16 +42,23 @@ export default class Game extends React.Component {
           reset={() => this.reset()}
         />
         <GuessSection
-          addGuess={e => {
-            e.preventDefault();
-            this.addGuess(e);
-          }}
+          makeGuess={guess => this.makeGuess(guess)}
+          getFeedback={(currGuess, secretNum)}
           currGuess={currGuess}
           secretNum={secretNum}
         />
         <GuessCount count={prevGuess.length} />
-        <GuessList guesses={this.state.prevGuess} />
+        <GuessList guesses={prevGuess} />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  secretNum: state.secretNum,
+  currGuess: state.currGuess,
+  prevGuess: state.prevGuess,
+  tutorial: state.tutorial
+})
+
+export default connect(mapStateToProps)(Game);

@@ -9,38 +9,13 @@ export default class GuessSection extends React.Component {
     super(props);
   }
 
-  feedback(currGuess, secretNum) {
-    if (currGuess === undefined) {
-      return "Make a Guess!";
-    } else if (currGuess === secretNum) {
-      return "Nailed It!";
-    } else if (
-      Math.abs(currGuess - secretNum) <= 5 ||
-      Math.abs(secretNum - currGuess) <= 5
-    ) {
-      return "Hot!";
-    } else if (
-      Math.abs(currGuess - secretNum) <= 10 ||
-      Math.abs(secretNum - currGuess) <= 10
-    ) {
-      return "Kinda Hot.";
-    } else if (
-      Math.abs(currGuess - secretNum) <= 15 ||
-      Math.abs(secretNum - currGuess) <= 15
-    ) {
-      return "Less than warm.";
-    } else {
-      return "Cold...";
-    }
-  }
-
   render() {
     return (
       <section>
         <h2 id="feedback">
-          {this.feedback(this.props.currGuess, this.props.secretNum)}
+          {props.getFeedback(this.props.currGuess, this.props.secretNum)}
         </h2>
-        <GuessForm addGuess={this.props.addGuess} />
+        <GuessForm addGuess={props.makeGuess} />
       </section>
     );
   }
