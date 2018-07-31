@@ -4,19 +4,11 @@ import GuessForm from "./guess-form";
 
 import "./guess-section.css";
 
-export default class GuessSection extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+export default function GuessSection(props) {
     return (
       <section>
-        <h2 id="feedback">
-          {props.getFeedback(this.props.currGuess, this.props.secretNum)}
-        </h2>
-        <GuessForm addGuess={props.makeGuess} />
+        <h2 id="feedback">{props.getFeedback}</h2>
+        <GuessForm handleGuess={props.handleGuess} />
       </section>
     );
-  }
 }

@@ -5,28 +5,19 @@ export const makeGuess = (guess) => ({
 })
 
 const GET_FEEDBACK = 'GET_FEEDBACK';
-export const getFeedback = (currGuess, secretNum) => ({
+export const getFeedback = (feedback) => ({
+    type: GET_FEEDBACK,
+    feedback
+})
 
-    if (currGuess === undefined) {
-      return "Make a Guess!";
-    } else if (currGuess === secretNum) {
-      return "Nailed It!";
-    } else if (
-      Math.abs(currGuess - secretNum) <= 5 ||
-      Math.abs(secretNum - currGuess) <= 5
-    ) {
-      return "Hot!";
-    } else if (
-      Math.abs(currGuess - secretNum) <= 10 ||
-      Math.abs(secretNum - currGuess) <= 10
-    ) {
-      return "Kinda Hot.";
-    } else if (
-      Math.abs(currGuess - secretNum) <= 15 ||
-      Math.abs(secretNum - currGuess) <= 15
-    ) {
-      return "Less than warm.";
-    } else {
-      return "Cold...";
-    }
+const TOGGLE_TUTORIAL = 'TOGGLE_TUTORIAL';
+export const toggleTutorial = (tutorial) => ({
+  type: TOGGLE_TUTORIAL,
+  tutorial
+})
+
+const NEW_GAME = 'NEW_GAME';
+export const newGame = (reset) => ({
+  type: NEW_GAME,
+  reset
 })

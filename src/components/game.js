@@ -5,52 +5,33 @@ import GuessSection from "./guess-section";
 import GuessCount from "./guess-count";
 import GuessList from "./guess-list";
 import InfoModal from "./info-modal";
-import { makeGuess } from "../action.js";
+import { makeGuess, getFeedback, toggleTutorial, newGame } from "../action.js";
 import { connect } from "react-redux";
 
 class Game extends React.Component {
-  makeGuess(guess) {
-    this.props.dispatch(makeGuess(guess))
-  }
-
-  // toggleTutorial() {
-  //   this.state.tutorial
-  //     ? this.setState({ tutorial: false })
-  //     : this.setState({ tutorial: true });
-  // }
-  //
-  // reset() {
-  //   this.setState({
-  //     secretNum: Math.floor(Math.random() * 100) + 1,
-  //     currGuess: undefined,
-  //     prevGuess: [],
-  //     tutorial: false
-  //   });
-  // }
-
   render() {
-    const currGuess = this.props.currGuess;
-    const secretNum = this.props.secretNum;
-    const prevGuess = this.props.prevGuess;
-    if (this.props.tutorial === true) {
-      return <InfoModal toggleTutorial={() => this.toggleTutorial()} />;
+    if (!this.props.tutorial) {
+      return (
+        <div>
+          <Header
+            handleTutorialOn={tutorial => this.props.dispatch(toggleTutorial(true))}
+            handleReset={() => this.props.dispatch(newGame())}
+          />
+          <GuessSection
+            handleGuess={guess => this.props.dispatch(makeGuess(guess))}
+            getFeedback={feedback => this.props.dispatch(getFeedback(feedback))}
+          />
+          <GuessCount count={this.props.prevGuess.length} />
+          <GuessList guesses={this.props.prevGuess} />
+        </div>
+      );
+    } else {
+      return (
+        <InfoModal
+              handleTutorialOff={tutorial => this.props.dispatch(toggleTutorial(false))}
+        />
+      )
     }
-    return (
-      <div>
-        <Header
-          toggleTutorial={() => this.toggleTutorial()}
-          reset={() => this.reset()}
-        />
-        <GuessSection
-          makeGuess={guess => this.makeGuess(guess)}
-          getFeedback={(currGuess, secretNum)}
-          currGuess={currGuess}
-          secretNum={secretNum}
-        />
-        <GuessCount count={prevGuess.length} />
-        <GuessList guesses={prevGuess} />
-      </div>
-    );
   }
 }
 
@@ -59,6 +40,6 @@ const mapStateToProps = state => ({
   currGuess: state.currGuess,
   prevGuess: state.prevGuess,
   tutorial: state.tutorial
-})
+});
 
 export default connect(mapStateToProps)(Game);

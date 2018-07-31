@@ -2,27 +2,21 @@ import React from "react";
 
 import "./top-nav.css";
 
-export default class TopNav extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+export default function TopNav(props) {
     return (
       <nav>
         <ul className="clearfix">
           <li>
-            <a className="what" href="#" onClick={this.props.toggleTutorial}>
+            <a className="what" href="#" onClick={props.toggleTutorial}>
               What?
             </a>
           </li>
           <li>
-            <a className="new" href="#" onClick={this.props.reset}>
+            <a className="new" href="#" onClick={props.reset}>
               + New Game
             </a>
           </li>
         </ul>
       </nav>
     );
-  }
 }
