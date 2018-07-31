@@ -1,7 +1,7 @@
 const MAKE_GUESS = 'MAKE_GUESS';
 export const makeGuess = (guess) => ({
   type: MAKE_GUESS,
-  guess
+  guess: parseInt(guess, 10)
 })
 
 const TOGGLE_TUTORIAL = 'TOGGLE_TUTORIAL';
