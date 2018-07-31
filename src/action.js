@@ -4,12 +4,6 @@ export const makeGuess = (guess) => ({
   guess
 })
 
-const GET_FEEDBACK = 'GET_FEEDBACK';
-export const getFeedback = (feedback) => ({
-    type: GET_FEEDBACK,
-    feedback
-})
-
 const TOGGLE_TUTORIAL = 'TOGGLE_TUTORIAL';
 export const toggleTutorial = (tutorial) => ({
   type: TOGGLE_TUTORIAL,
