@@ -11,17 +11,17 @@ export const reducer = (state=initialState, action) => {
       currGuess: action.guess,
       prevGuess: [...state.prevGuess, action.guess]
     })
-    } else if(action.type === 'TOGGLE_TUTORIAL') {
-        return Object.assign({}, state, {
-          tutorial: action.tutorial
-        })
-    } else if(action.type === 'NEW_GAME') {
-        return Object.assign({}, state, {
-          secretNum: Math.floor(Math.random() * 100) + 1,
-          currGuess: null,
-          prevGuess: [],
-          tutorial: false
-        })
-    }
-      return state;
-    }
+  } else if(action.type === 'TOGGLE_TUTORIAL') {
+    return Object.assign({}, state, {
+      tutorial: action.tutorial
+    })
+  } else if(action.type === 'NEW_GAME') {
+    return Object.assign({}, state, {
+      secretNum: Math.floor(Math.random() * 100) + 1,
+      currGuess: null,
+      prevGuess: [],
+      tutorial: false
+    })
+  }
+  return state;
+}
