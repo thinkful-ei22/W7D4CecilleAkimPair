@@ -5,9 +5,8 @@ export const makeGuess = (guess) => ({
 })
 
 const TOGGLE_TUTORIAL = 'TOGGLE_TUTORIAL';
-export const toggleTutorial = (tutorial) => ({
+export const toggleTutorial = () => ({
   type: TOGGLE_TUTORIAL,
-  tutorial
 })
 
 const NEW_GAME = 'NEW_GAME';

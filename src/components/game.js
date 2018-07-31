@@ -15,7 +15,7 @@ class Game extends React.Component {
       return (
         <div>
           <Header
-            handleTutorialOn={tutorial => this.props.dispatch(toggleTutorial(true))}
+            toggleTutorial={this.props.toggleTutorial}
             handleReset={() => this.props.dispatch(newGame())}
           />
           <GuessSection
@@ -29,7 +29,7 @@ class Game extends React.Component {
     } else {
       return (
         <InfoModal
-              handleTutorialOff={tutorial => this.props.dispatch(toggleTutorial(false))}
+          toggleTutorial={this.props.toggleTutorial}
         />
       )
     }
@@ -44,4 +44,8 @@ const mapStateToProps = state => ({
   feedback: getFeedback(state),
 });
 
-export default connect(mapStateToProps)(Game);
+const mapDispatchToProps = dispatch => ({
+  toggleTutorial: () => dispatch(toggleTutorial())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
